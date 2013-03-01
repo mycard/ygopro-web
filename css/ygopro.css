@@ -1,0 +1,71 @@
+.ygopro {
+    width: 1024px;
+    height: 640px;
+    background-image: url(../img/textures/bg.jpg);
+}
+
+.side {
+    float: left;
+    width: 304px;
+    /*background-color: gray;*/
+    height: 100%;
+
+}
+
+.image {
+    height: 256px;
+}
+
+.side_tabs li{
+    font-size: 12px;
+}
+.tab {
+    height: 305px;
+    overflow-y: auto;
+}
+.main {
+    -webkit-perspective: 1000px;
+    width: 720px;
+    height: 520px;
+    float: left;
+
+}
+
+.info {
+    height: 120px;
+    /*background-color: red;*/
+}
+
+.stage {
+    /*background-color: pink;*/
+    -webkit-perspective-origin: center center;
+    position: relative;
+}
+
+.game_card {
+    top: 0px;
+}
+
+.field {
+    position: absolute;
+    height: 256px;
+    width: 256px;
+
+
+    background: url(../img/textures/field.png) no-repeat;
+    -webkit-transform: rotateX(55deg) scale3d(2,2,2) translate3d(116px,68px,0);
+
+}
+.opponent_hand {
+    position: absolute;
+    white-space:nowrap;
+    -webkit-transform: translate3d(0,-340px,-3000px);
+
+    /*margin: 0 auto;
+    text-align:center;*/
+}
+.player_hand {
+    position: absolute;
+    white-space:nowrap;
+    -webkit-transform: translate3d(0,830px,-1600px);
+}
