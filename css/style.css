@@ -72,15 +72,15 @@ header p {
 	text-align: center;
 	top: 23px;
 }
-#detail_image{
+/*#detail_image{
 	z-index: 100;
 	position: absolute;
 	left: 490px;
 	top: 233px;
 	height: 254px;
 	width: 177px;
-}
-#detail_textarea{
+}*/
+/*#detail_textarea{
 	z-index: 100;
 	position: absolute;
 	left: 671px;
@@ -92,7 +92,7 @@ header p {
 	background: #dddddd;
 	color: #333333;
 	resize:none;
-}
+} */
 #fields{
 	z-index: 100;
 	position: absolute;
@@ -195,7 +195,7 @@ table, td{
 }
 
 
-#apDiv1 {
+/*#apDiv1 {
     position: absolute;
     left: 199px;
     top: 259px;
@@ -253,4 +253,4 @@ table, td{
     height: 16px;
     z-index: 1002;
     cursor: pointer;
-}
+}*/

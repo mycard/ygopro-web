@@ -12,7 +12,16 @@
 
 }
 
-.image {
+.replay_control{
+    float:right;
+    margin-right: 30px;
+}
+.replay_control button {
+    width: 72px;
+    display: block;
+}
+.top {
+    /*float: left;*/
     height: 256px;
 }
 
