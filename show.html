@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Ygopro Replay</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/ygopro.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.1.custom.min.css">
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+
+    <script type="text/x-jquery-tmpl" id="page-tmpl">
+        第 ${current_page} 页 / 共 ${page_num} 页
+    </script>
+    <script type="text/x-jquery-tmpl" id="field-tmpl">
+        <div class="${location}" id="${player}_${location}_${place}" style="top:${top}px; left:${left}px;"></div>
+    </script>
+    <script type="text/x-jquery-tmpl" id="thumb-tmpl">
+        <div class='thumb' style="top:${top}px; left:${left}px; right:${right}px; bottom:${bottom}px;cursor:pointer;">
+            <img class="thumbImg" src='${card_img_thumb_url}${card_info.card_id}.jpg'/>
+            <img class="equipImg" src='img/equip.png' style="display: none"/>
+            <img class="targetImg" src='img/target.png' style="display: none"/>
+        </div>
+    </script>
+    <script type="text/x-jquery-tmpl" id="label_field-tmpl">
+        <label class=${type}>${text}</label>
+    </script>
+    <script type="text/x-jquery-tmpl" id="sortable-tmpl">
+        <li class="ui-state-default"><img class='thumbImg' style='cursor:move;'
+                                          src='${card_img_thumb_url}${card_info.card_id}.jpg'
+                                          onmouseover="showDetail(${card_info.card_id})"/></li>
+    </script>
+    <script type="text/x-jquery-tmpl" id="CounterSelector-tmpl">
+        <div class="CounterSelector">
+            种类：
+            <select class="select">
+                {{each counters}}
+                {{if $value.code==_code}}
+                <option value="${$value.code}" selected="selected">${$value.str}</option>
+                {{else}}
+                <option value="${$value.code}">${$value.str}</option>
+                {{/if}}
+                {{/each}}
+            </select>
+            数量：
+            <input class="spinner" onkeydown="return checkNums()" value="${_number}"/>
+            <button class="btn btn-danger" onclick="delCounterSelector()">删除</button>
+        </div>
+    </script>
+</head>
+<body>
+<div class="ygopro">
+    <div class="side">
+        <img class="image" src="http://images.my-card.in/29088922.jpg"/>
+
+        <div class="side_tabs">
+            <ul>
+                <li><a href="#card">卡片信息</a></li>
+                <li><a href="#history">消息记录</a></li>
+                <li><a href="#settings">系统设定</a></li>
+            </ul>
+            <div id="card" class="tab">
+                <p>
+                    这张卡的攻击力·守备力变成这张卡的等级×300的数值。自己的准备阶段时，这张卡的等级上升1星（等级最多12星）。自己场上有「命运女郎·沃特莉」以外的名字带有「命运女郎」的怪兽表侧表示存在的场合这张卡特殊召唤成功时，从自己卡组抽2张卡。</p>
+            </div>
+            <div id="history" class="tab">
+                <ul>
+                    <li>(」·ω·)」呜！</li>
+                    <li>(／·ω·)／喵！</li>
+                    <li>(」·ω·)」呜！</li>
+                    <li>(／·ω·)／喵！</li>
+                    <li>(」·ω·)」呜！</li>
+                    <li>(／·ω·)／喵！</li>
+                    <li>世界已完蛋</li>
+                </ul>
+            </div>
+            <div id="settings" class="tab">
+                <form>
+                    喵
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="info">info</div>
+        <div class="stage"><!-- 包含手卡在内的 决斗场区 -->
+            <div class="opponent_hand">
+                <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+            </div>
+            <div class="field">
+                <div class="player">
+                    <div class="extra">
+                        <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                    </div>
+                    <div class="deck">
+                        <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                    </div>
+                    <div class="fieldspell">
+                        <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                    </div>
+                    <div class="graveyard">
+                        <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                    </div>
+                    <div class="removed">
+                        <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                    </div>
+                    <div class="spelltraps zone0">
+                        <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                    </div>
+                    <div class="spelltraps zone1">
+                        <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                    </div>
+                    <div class="spelltraps zone2">
+                        <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                    </div>
+                    <div class="spelltraps zone3">
+                        <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                    </div>
+                    <div class="spelltraps zone4">
+                        <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                    </div>
+                    <div class="monsters zone0">
+                        <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                    </div>
+                    <div class="monsters zone1">
+                        <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                    </div>
+                    <div class="monsters zone2">
+                        <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                    </div>
+                    <div class="monsters zone3">
+                        <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                    </div>
+                    <div class="monsters zone4">
+                        <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                    </div>
+                </div>
+            </div>
+            <div class="player_hand">
+                <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+                <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
+            </div>
+
+            <!--<img class="game_card" src="http://images.my-card.in/35486099.jpg"/>
+            <img class="game_card" src="http://images.my-card.in/35486099.jpg"/>
+            <img class="game_card" src="http://images.my-card.in/35486099.jpg"/>
+            <img class="game_card" src="http://images.my-card.in/35486099.jpg"/>
+            <img class="game_card" src="http://images.my-card.in/35486099.jpg"/>
+
+            <img class="game_card" src="http://images.my-card.in/35486099.jpg"/>
+            <img class="game_card" src="http://images.my-card.in/35486099.jpg"/>
+            <img class="game_card" src="http://images.my-card.in/35486099.jpg"/>
+            <img class="game_card" src="http://images.my-card.in/35486099.jpg"/>
+            <img class="game_card" src="http://images.my-card.in/35486099.jpg"/>-->
+
+
+        </div>
+    </div>
+</div>
+<div style="font-size:20px;" align="center">YGOPro Replay Parser V0.8</div>
+<div style="height:20px;"></div>
+<div align="center"><a href="index.html" target="_blank" style="color:red">我要上传</a>　　　　<a id="source" href="index.html"
+                                                                                          target="_blank"
+                                                                                          style="color:red">下载原YRP文件</a>　　　　<a
+        id="parserfile" href="index.html" target="_blank" style="color:red">下载解析文件</a></div>
+<div style="position:relative; width:1000px; margin:auto">
+    <div style="position:relative; width:860px; margin:auto; height:530px;">
+        <div id="apDiv1">
+            <div id="pdiv" align="center" style="color:#006600; font-weight:bold;">阶段</div>
+        </div>
+        <img id="DragImage" src="img/unknow.jpg" alt=""/>
+
+        <div id="LPbar">
+            <div id="Player0name" style="float:left;  font-size:14px; font-weight:bold; color:#003399">player1</div>
+            <div id="Player0lp" style="float:left;  font-size:14px; font-weight:bold; color:#FF0000">8000</div>
+            <div id="Player1name" style="float:right; font-size:14px; font-weight:bold; color:#003399">player2</div>
+            <div id="Player1lp" style="float:right;  font-size:14px; font-weight:bold; color:#FF0000">8000</div>
+        </div>
+        <img id="detail_image" src="img/unknow.jpg" alt=""/>
+        <!--<label id="detail_label"></label>-->
+        <textarea name="detail_textarea" readonly id="detail_textarea" style="font-size:14px;"></textarea>
+
+        <div id="fields"></div>
+        <div id="popMenu">
+
+        </div>
+        <div style="background-color:#efefef; overflow:scroll; width:343px; position:absolute; left:493px; height: 195px; top: 19px;"
+             id="textout"></div>
+        <div id="apDiv2" onClick="stepPlay()">单步播放</div>
+        <div id="apDiv3" onClick="pause()">暂停</div>
+        <div id="apDiv4" onClick="play()">连续播放</div>
+        <div id="apDiv5" onClick="playctrl('up')">加速</div>
+        <div id="apDiv6" onClick="playctrl('down')">减速</div>
+    </div>
+</div>
+<div align="center">特别感谢【囧囧·D·路飞 350002947】的大力协助，图片及卡片信息由http://my-card.in提供。</div>
+<div id="ad" style="margin:auto;" align="center">
+    <script type="text/javascript"><!--
+    google_ad_client = "ca-pub-9520543693264555";
+    /* YGOad */
+    google_ad_slot = "2745459735";
+    google_ad_width = 468;
+    google_ad_height = 60;
+    //-->
+    </script>
+    <script type="text/javascript"
+            src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+</div>
+
+
+<script src="js/vendor/jquery-1.9.0.min.js" type="text/javascript"></script>
+<script src="js/vendor/jquery-ui-1.10.1.custom.min.js"></script>
+<script src="js/vendor/jquery.tmpl.min.js" type="text/javascript"></script>
+<script src="js/main.js" type="text/javascript"></script>
+<script src="js/drag.js" type="text/javascript"></script>
+<script src="js/upload.js" type="text/javascript"></script>
+<script src="js/ygo.js" type="text/javascript"></script>
+<script src="js/popmenu.js" type="text/javascript"></script>
+<script src="js/parser.js" type="text/javascript"></script>
+
+<script src="js/plugins.js"></script>
+<script src="js/ygopro.js"></script>
+</body>
+</html>
