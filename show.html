@@ -61,7 +61,9 @@
 <div class="ygopro">
     <div class="side">
         <div class="top">
-            <img id="detail_image" class="image" src="img/unknow.jpg" alt=""/>
+            <!--<div class="image_wrapper">-->
+                <img id="detail_image" class="image" src="img/unknow.jpg" alt=""/>
+            <!--</div>-->
             <!--<img class="image" src="http://images.my-card.in/29088922.jpg"/>-->
             <div class="replay_control">
                 <button id="apDiv2" onClick="stepPlay()">单步播放</button>
@@ -81,13 +83,52 @@
             <div id="textout" class="tab"></div>
             <div id="settings" class="tab">
                 <form>
-                    喵
+                    <label class="checkbox">
+                        <input id="setting_enable_3d" type="checkbox" checked> 启用3D
+                    </label>
                 </form>
             </div>
         </div>
     </div>
     <div class="main">
-        <div class="info">info</div>
+        <div class="info">
+            <div class="playerinfo player">
+                <div>
+                    <div class="lp">
+                        <div class="lp_draw"></div>
+                        <div id="Player0lp" class="lp_value">8000</div>
+                    </div>
+                    <div id="player_name" class="name">zh99998</div>
+                </div>
+                <div>
+                    <img id="player_avatar" class="avatar" src="http://my-card.in/users/zh99998.png"/>
+                </div>
+            </div>
+            <div class="turn">
+                10
+            </div>
+            <div class="playerinfo opponent">
+                <div>
+                    <div class="lp">
+                        <div class="lp_draw"></div>
+                        <div id="player_lp" class="lp_value">8000</div>
+                    </div>
+                    <div id="opponent_name" class="name">zh99998</div>
+                </div>
+                <div>
+                    <img id="opponent_avatar" class="avatar" src="http://my-card.in/users/zh99998.png"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="phases">
+            <button class="phase btn">DP</button>
+            <button class="phase btn">SP</button>
+            <button class="phase btn">M1</button>
+            <button class="phase btn">BP</button>
+            <button class="phase btn">M2</button>
+            <button class="phase btn">EP</button>
+        </div>
         <div class="stage"><!-- 包含手卡在内的 决斗场区 -->
             <div class="opponent_hand">
                 <img class="game_card" src="http://images.my-card.in/29088922.jpg"/>
@@ -179,10 +220,10 @@
         <img id="DragImage" src="img/unknow.jpg" alt=""/>
 
         <div id="LPbar">
-            <div id="Player0name" style="float:left;  font-size:14px; font-weight:bold; color:#003399">player1</div>
+            <!--<div id="Player0name" style="float:left;  font-size:14px; font-weight:bold; color:#003399">player1</div>
             <div id="Player0lp" style="float:left;  font-size:14px; font-weight:bold; color:#FF0000">8000</div>
             <div id="Player1name" style="float:right; font-size:14px; font-weight:bold; color:#003399">player2</div>
-            <div id="Player1lp" style="float:right;  font-size:14px; font-weight:bold; color:#FF0000">8000</div>
+            <div id="Player1lp" style="float:right;  font-size:14px; font-weight:bold; color:#FF0000">8000</div>-->
         </div>
         <!--<img id="detail_image" src="img/unknow.jpg" alt=""/>-->
         <!--<label id="detail_label"></label>-->
@@ -220,6 +261,11 @@
 <script src="js/vendor/jquery-1.9.0.min.js" type="text/javascript"></script>
 <script src="js/vendor/jquery-ui-1.10.1.custom.min.js"></script>
 <script src="js/vendor/jquery.tmpl.min.js" type="text/javascript"></script>
+<script src="js/vendor/jquery.transit.min.js" type="text/javascript"></script>
+<script src="js/vendor/spine/spine.js" type="text/javascript"></script>
+
+
+
 <script src="js/main.js" type="text/javascript"></script>
 <script src="js/drag.js" type="text/javascript"></script>
 <script src="js/upload.js" type="text/javascript"></script>
@@ -229,5 +275,7 @@
 
 <script src="js/plugins.js"></script>
 <script src="js/ygopro.js"></script>
+
+
 </body>
 </html>

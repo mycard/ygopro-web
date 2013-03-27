@@ -143,7 +143,8 @@ function readMessage(){
 	switch(parseInt(list_array[1])){
 		case 0: //deck
 			palyer_name_0 = getName(list_array[2]);
-			$('#Player'+getPlayer(list_array[2])+'name').html(getName(list_array[2]));
+            duel.set_player_name(palyer_name_0);
+			//$('#Player'+getPlayer(list_array[2])+'name').html(getName(list_array[2]));
 			for (var i=3;i<list_array.length;i++){
 				if (list_array[i]=="ALLDECK"){
 					is_main = true;
@@ -170,7 +171,8 @@ function readMessage(){
 			}
 			
 			player_name_1 = getName(list_array[i+1]);
-			$('#Player'+getPlayer(list_array[i+1])+'name').html(getName(list_array[i+1]));
+            duel.set_opponent_name(player_name_1);
+			//$('#Player'+getPlayer(list_array[i+1])+'name').html(getName(list_array[i+1]));
 			for (var i=i+2;i<list_array.length;i++){
 				if (list_array[i]=="ALLDECK"){
 					is_main = true;
