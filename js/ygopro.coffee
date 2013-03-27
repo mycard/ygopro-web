@@ -17,11 +17,15 @@ class Duel extends Spine.Controller
     @set_lp('player',lp)
   set_opponent_lp: (lp)->
     @set_lp('opponent',lp)
-
+  set_phase: (phase)->
+    $(".phase[data-phase!=#{phase}]").removeClass 'active'
+    $(".phase[data-phase=#{phase}]").addClass 'active'
   set_name: (player, name)->
     $("##{player}_name").html name
     $("##{player}_avatar").attr 'src', Duel.avatar_url.replace(':name', name)
   set_lp: (player, lp)->
+    $("##{player}_lp").html lp
+    $("##{player}_lp_bar").html width
 
 
 @duel = new Duel()

@@ -48,6 +48,11 @@
       return this.set_lp('opponent', lp);
     };
 
+    Duel.prototype.set_phase = function(phase) {
+      $(".phase[data-phase!=" + phase + "]").removeClass('active');
+      return $(".phase[data-phase=" + phase + "]").addClass('active');
+    };
+
     Duel.prototype.set_name = function(player, name) {
       $("#" + player + "_name").html(name);
       return $("#" + player + "_avatar").attr('src', Duel.avatar_url.replace(':name', name));

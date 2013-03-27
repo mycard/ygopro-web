@@ -95,8 +95,8 @@
             <div class="playerinfo player">
                 <div>
                     <div class="lp">
-                        <div class="lp_draw"></div>
-                        <div id="Player0lp" class="lp_value">8000</div>
+                        <div id="player_lp_bar" class="lp_bar"></div>
+                        <div id="player_lp" class="lp_value">8000</div>
                     </div>
                     <div id="player_name" class="name">zh99998</div>
                 </div>
@@ -110,8 +110,8 @@
             <div class="playerinfo opponent">
                 <div>
                     <div class="lp">
-                        <div class="lp_draw"></div>
-                        <div id="player_lp" class="lp_value">8000</div>
+                        <div id="opponent_lp_bar" class="lp_bar"></div>
+                        <div id="opponent_lp" class="lp_value">8000</div>
                     </div>
                     <div id="opponent_name" class="name">zh99998</div>
                 </div>
@@ -122,12 +122,12 @@
         </div>
 
         <div class="phases">
-            <button class="phase btn">DP</button>
-            <button class="phase btn">SP</button>
-            <button class="phase btn">M1</button>
-            <button class="phase btn">BP</button>
-            <button class="phase btn">M2</button>
-            <button class="phase btn">EP</button>
+            <button class="phase btn" data-phase="DP">DP</button>
+            <button class="phase btn" data-phase="SP">SP</button>
+            <button class="phase btn" data-phase="M1">M1</button>
+            <button class="phase btn" data-phase="BP">BP</button>
+            <button class="phase btn" data-phase="M2">M2</button>
+            <button class="phase btn" data-phase="EP">EP</button>
         </div>
         <div class="stage"><!-- 包含手卡在内的 决斗场区 -->
             <div class="opponent_hand">
