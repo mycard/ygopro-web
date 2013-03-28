@@ -199,6 +199,8 @@ function readMessage(){
 			
 			loadCards(cards_id);
 			break;
+        case 40:
+            duel.set_turn(list_array[3])
 		case 41:
 			//MSG|41|新阶段|抽卡阶段
 			//$('#pdiv').html(list_array[3]);
@@ -307,9 +309,11 @@ function readMessage(){
 			
 			break;
 		case 91://伤害
-			$('#Player'+getPlayer(list_array[5])+'lp').html(list_array[6]);
+            duel.set_lp(getPlayer(list_array[5]) ? 'player' : 'opponent', list_array[6])
+			/*$('#Player'+getPlayer(list_array[5])+'lp').html(list_array[6]);*/
 			break;
 		case 92:
+            duel.set_lp(getPlayer(list_array[5]) ? 'player' : 'opponent', '+=' + list_array[6])
 			$('#Player'+getPlayer(list_array[2])+'lp').html(parseInt($('#Player'+getPlayer(list_array[2])+'lp').html())+parseInt(list_array[3]));
 			break;
 		case 100://cost

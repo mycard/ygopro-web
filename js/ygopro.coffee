@@ -20,12 +20,22 @@ class Duel extends Spine.Controller
   set_phase: (phase)->
     $(".phase[data-phase!=#{phase}]").removeClass 'active'
     $(".phase[data-phase=#{phase}]").addClass 'active'
+  set_turn: (turn)->
+    $('#turn').html turn
+
   set_name: (player, name)->
     $("##{player}_name").html name
     $("##{player}_avatar").attr 'src', Duel.avatar_url.replace(':name', name)
   set_lp: (player, lp)->
+    if typeof lp == "string"
+      if lp[0...2] == '+='
+        lp = parseInt($("##{player}_lp").html()) + parseInt(lp.slice(2))
+      else if lp[0...2] == '-='
+        lp = parseInt($("##{player}_lp").html()) - parseInt(lp.slice(2))
+      else
+        lp = parseInt lp
     $("##{player}_lp").html lp
-    $("##{player}_lp_bar").html width
+    $("##{player}_lp_bar").animate 'width': "#{(if lp <= 0 then 0 else if lp >= 8000 then 1 else lp/8000)*100}%"
 
 
 @duel = new Duel()

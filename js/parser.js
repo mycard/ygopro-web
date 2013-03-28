@@ -14,8 +14,8 @@ $.getUrlParam = function(name)
 var tmp;
 
 $(document).ready(function(){
-	var dragImage  = document.getElementById('DragImage');
-	dragImage.style.display = "none";
+	/*var dragImage  = document.getElementById('DragImage');
+	dragImage.style.display = "none";*/
 	
 	
 	initField();

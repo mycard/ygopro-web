@@ -53,12 +53,30 @@
       return $(".phase[data-phase=" + phase + "]").addClass('active');
     };
 
+    Duel.prototype.set_turn = function(turn) {
+      return $('#turn').html(turn);
+    };
+
     Duel.prototype.set_name = function(player, name) {
       $("#" + player + "_name").html(name);
       return $("#" + player + "_avatar").attr('src', Duel.avatar_url.replace(':name', name));
     };
 
-    Duel.prototype.set_lp = function(player, lp) {};
+    Duel.prototype.set_lp = function(player, lp) {
+      if (typeof lp === "string") {
+        if (lp.slice(0, 2) === '+=') {
+          lp = parseInt($("#" + player + "_lp").html()) + parseInt(lp.slice(2));
+        } else if (lp.slice(0, 2) === '-=') {
+          lp = parseInt($("#" + player + "_lp").html()) - parseInt(lp.slice(2));
+        } else {
+          lp = parseInt(lp);
+        }
+      }
+      $("#" + player + "_lp").html(lp);
+      return $("#" + player + "_lp_bar").animate({
+        'width': "" + ((lp <= 0 ? 0 : lp >= 8000 ? 1 : lp / 8000) * 100) + "%"
+      });
+    };
 
     return Duel;
 
