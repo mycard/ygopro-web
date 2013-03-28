@@ -37,6 +37,14 @@
     height: 289px;
     overflow-y: auto;
 }
+.setting_action_inteval {
+    border: 0;
+    width: 20px;
+}
+/*.setting_action_inteval_slider {
+    display: inline;
+    width: 30px;
+} */
 .main {
     -webkit-perspective: 1000px;
     width: 720px;

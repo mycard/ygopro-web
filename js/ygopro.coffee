@@ -1,4 +1,5 @@
 $('.side_tabs').tabs()
+
 $('#setting_enable_3d').change ->
   if @checked
     $('.field').transition scale: 2, translate: [116, 40], rotateX: 45
@@ -22,6 +23,12 @@ class Duel extends Spine.Controller
     $(".phase[data-phase=#{phase}]").addClass 'active'
   set_turn: (turn)->
     $('#turn').html turn
+    if turn % 2 #player's turn
+      $('.phase').addClass 'btn-info'
+      $('.phase').removeClass 'btn-danger'
+    else
+      $('.phase').removeClass 'btn-info'
+      $('.phase').addClass 'btn-danger'
 
   set_name: (player, name)->
     $("##{player}_name").html name
@@ -37,8 +44,21 @@ class Duel extends Spine.Controller
     $("##{player}_lp").html lp
     $("##{player}_lp_bar").animate 'width': "#{(if lp <= 0 then 0 else if lp >= 8000 then 1 else lp/8000)*100}%"
 
+class Replay
+  speed: $('#setting_action_inteval').val()
+  get_action_inteval: ->
+    Math.pow(10, 4 - $('#setting_action_inteval').val() * 0.2)
 
 @duel = new Duel()
+@replay = new Replay()
+
+$('#setting_action_inteval_slider').slider
+  min: 1,
+  max: 10,
+  value: $( "#setting_action_inteval" ).val(),
+  slide: (event, ui )->
+    $( "#setting_action_inteval" ).val ui.value
+
 
 $(document).ready ->
   $('#setting_enable_3d').change()

@@ -1,14 +1,14 @@
 
 var messages = new Array();;
 var message_id = 0;
-var exetimeout = 1000;
+/*var exetimeout = 1000;*/
 
 function readReplay(tmp){
-	
+
 	messages=tmp.split('\n');
 	readMessage();
 
-	
+
 }
 
 function getID(str){
@@ -75,7 +75,7 @@ function stepPlay(){
 function pause(){
 	paused=true;
 	}
-function playctrl(ctl){
+/*function playctrl(ctl){
 	if (ctl=="up")
 	{
 		if (exetimeout>1000)
@@ -92,9 +92,9 @@ function playctrl(ctl){
 		}
 		exetimeout=exetimeout+500;
 	}
-}
+}*/
 function play(ctl){
-	
+
 	paused=false;
 	readMessage();
 
@@ -105,10 +105,10 @@ function readMessage(){
 	{
 		return;
 	}
-	
+
 	if(message_id >= messages.length)
 		return ;
-		
+
 	if (message_id>1){//过滤连续相同的消息
 	if (messages[message_id]==messages[message_id-1])
 	{
@@ -116,9 +116,9 @@ function readMessage(){
 		readMessage();
 		return;
 	}}
-	
+
 	var message = messages[message_id];
-	 
+
 	var list_array= new Array();
 	list_array = message.split('|');
 	message_id++;
@@ -133,11 +133,11 @@ function readMessage(){
 	}catch(e){
 		alert(e)
 	}
-	
+
 
 	//输出图形解析
 
-	
+
 	try
 	{
 	switch(parseInt(list_array[1])){
@@ -160,7 +160,7 @@ function readMessage(){
 					break;
 				}
 				var id = getID(list_array[i]);
-				
+
 				cards_id.push(id);
 				if(is_main){
 					addNewCard(id, 0, "location_deck", 0);
@@ -169,7 +169,7 @@ function readMessage(){
 					addNewCard(id, 0, "location_extra", 0);
 				}
 			}
-			
+
 			player_name_1 = getName(list_array[i+1]);
             duel.set_opponent_name(player_name_1);
 			//$('#Player'+getPlayer(list_array[i+1])+'name').html(getName(list_array[i+1]));
@@ -196,7 +196,7 @@ function readMessage(){
 					addNewCard(id, 1, "location_extra", 0);
 				}
 			}
-			
+
 			loadCards(cards_id);
 			break;
         case 40:
@@ -221,14 +221,14 @@ function readMessage(){
 					if(loc == "location_szone" && sequence==5){
 						loc = "location_field";
 						sequence = 0;
-					}						
+					}
 					field_id = player + "_" + loc + "_" + sequence;
 					var field = document.getElementById(field_id);
 					removeCard(field, id);
 				}
-				
+
 				if (list_array[i]=="ADDCARD"){
-					
+
 					var player = getPlayer(list_array[i+1]);
 					var id = getID(list_array[i+7]);
 					var loc = getLocation(list_array[i+3]);
@@ -247,7 +247,7 @@ function readMessage(){
 					//setcardstatus(field,id);
 				}
 			}
-			
+
 			break;
 		case 54://放置卡片
 			//MSG|54|放置卡片|活死人的呼声?97077563|Playerpos1?邪之混沌|位置|8|次序|2|表示|10
@@ -270,7 +270,7 @@ function readMessage(){
 			break;
 		case 62://特殊召唤
 			//MSG|62|特殊召唤阶段开始|Playerpos0?anyouxi|位置|4|次序|1|表示|4|云魔物-小烟球?8082555
-			
+
 			var player = getPlayer(list_array[3]);
 			var id = getID(list_array[10]);
 			var loc = getLocation(list_array[5]);
@@ -300,13 +300,13 @@ function readMessage(){
 					field_id = player + "_location_deck_0";
 					var field = document.getElementById(field_id);
 					removeCard(field, id);
-					
+
 					field_id = player + "_location_hand_0";
 					field = document.getElementById(field_id);
 					addCard(field, newCard_Info(id));
 				}
 			}
-			
+
 			break;
 		case 91://伤害
             duel.set_lp(getPlayer(list_array[5]) ? 'player' : 'opponent', list_array[6])
@@ -314,10 +314,11 @@ function readMessage(){
 			break;
 		case 92:
             duel.set_lp(getPlayer(list_array[5]) ? 'player' : 'opponent', '+=' + list_array[6])
-			$('#Player'+getPlayer(list_array[2])+'lp').html(parseInt($('#Player'+getPlayer(list_array[2])+'lp').html())+parseInt(list_array[3]));
+			/*$('#Player'+getPlayer(list_array[2])+'lp').html(parseInt($('#Player'+getPlayer(list_array[2])+'lp').html())+parseInt(list_array[3]));*/
 			break;
 		case 100://cost
-			$('#Player'+getPlayer(list_array[3])+'lp').html(list_array[7]);
+            duel.set_lp(getPlayer(list_array[3]) ? 'player' : 'opponent', list_array[7])
+			/*$('#Player'+getPlayer(list_array[3])+'lp').html(list_array[7]);*/
 			break;
 		default:
 			readMessage();
@@ -327,7 +328,7 @@ function readMessage(){
 		alert(e);
 		alert(message);
 	}
-	setTimeout("readMessage()",exetimeout);
+	setTimeout("readMessage()",replay.get_action_inteval());
 }
 
 

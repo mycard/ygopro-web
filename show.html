@@ -69,8 +69,8 @@
                 <button id="apDiv2" onClick="stepPlay()">单步播放</button>
                 <button id="apDiv3" onClick="pause()">暂停</button>
                 <button id="apDiv4" onClick="play()">连续播放</button>
-                <button id="apDiv5" onClick="playctrl('up')">加速</button>
-                <button id="apDiv6" onClick="playctrl('down')">减速</button>
+                <!--<button id="apDiv5" onClick="playctrl('up')">加速</button>
+                <button id="apDiv6" onClick="playctrl('down')">减速</button>-->
             </div>
         </div>
         <div class="side_tabs">
@@ -84,7 +84,11 @@
             <div id="settings" class="tab">
                 <form>
                     <label class="checkbox">
-                        <input id="setting_enable_3d" type="checkbox" checked> 启用3D
+                        启用3D <input id="setting_enable_3d" class="setting_enable_3d" type="checkbox" checked>
+                    </label>
+                    <label>
+                        播放速度 <input type="text" id="setting_action_inteval" class="setting_action_inteval" value="5"/>
+                        <div id="setting_action_inteval_slider" class="setting_action_inteval_slider"></div>
                     </label>
                 </form>
             </div>
@@ -262,7 +266,8 @@
 <script src="js/vendor/jquery.transit.min.js" type="text/javascript"></script>
 <script src="js/vendor/spine/spine.js" type="text/javascript"></script>
 
-
+<script src="js/plugins.js"></script>
+<script src="js/ygopro.js"></script>
 
 <script src="js/main.js" type="text/javascript"></script>
 <script src="js/drag.js" type="text/javascript"></script>
@@ -271,8 +276,7 @@
 <script src="js/popmenu.js" type="text/javascript"></script>
 <script src="js/parser.js" type="text/javascript"></script>
 
-<script src="js/plugins.js"></script>
-<script src="js/ygopro.js"></script>
+
 
 
 </body>
