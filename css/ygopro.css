@@ -12,8 +12,10 @@
 
 }
 
-.image {
+.card_image {
     padding: 10px 8px 11px 8px;
+    width: 177px;
+    height: 254px;
     border: 1px solid;
     background: gray;
 }
@@ -34,9 +36,10 @@
     font-size: 12px;
 }
 .tab {
-    height: 289px;
+    height: 285px;
     overflow-y: auto;
 }
+
 .setting_action_inteval {
     border: 0;
     width: 20px;
@@ -48,7 +51,7 @@
 .main {
     -webkit-perspective: 1000px;
     width: 720px;
-    height: 520px;
+    height: 640px;
     float: left;
 
 }
@@ -60,7 +63,7 @@
 
     /*background-color: red;*/
 }
-.name {
+.playerinfo .name {
     color: white;
 }
 .avatar {
@@ -138,7 +141,7 @@
     -webkit-transform: scale(2,2) translate3d(150px,0px, 0px);
 }
 .player.hand {
-    -webkit-transform: scale(2,2) translate3d(150px,140px, 500px);
+    -webkit-transform: scale(2,2) translate3d(150px,150px, 500px);
 }
 
 .game_card {

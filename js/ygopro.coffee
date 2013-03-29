@@ -1,15 +1,16 @@
-$('.side_tabs').tabs()
-
-$('#setting_enable_3d').change ->
-  if @checked
-    $('.field').transition scale: 2, translate: [116, 40], rotateX: 45
-  else
-    $('.field').transition scale: 2, translate: [116, 40], rotateX: 0
-#class Duel extends Spine.Model
-#  @configure 'Duel', 'player_name', 'opponent_name', 'player_lp', 'opponent_lp', 'turn', 'phase'
+class Card extends Spine.Model
+  @fetch: (cards_id) ->
+    mycard.fetch_cards cards_id, (cards)->
+      Card.refresh(cards)
 
 class Duel extends Spine.Controller
+  events:
+    "mouseover .game_card": "show"
   @avatar_url: 'http://my-card.in/users/:name.png'
+  show: (event)->
+    id = $(event.target).tmplItem().data.card_info.card_id
+    $('.card_image').replaceWith $('#card_image_template').tmpl {id: id}
+    $('#card').html $('#card_template').tmpl Card.find(id)
   set_player_name: (name)->
     @set_name('player', name)
   set_opponent_name: (name)->
@@ -20,6 +21,7 @@ class Duel extends Spine.Controller
     @set_lp('opponent',lp)
   set_phase: (phase)->
     phases = {DP: '抽卡阶段', SP: '准备阶段', M1: '主要阶段1', BP: '战斗阶段', M2: '主要阶段2', EP: '结束阶段'}
+    humane.remove()
     humane.log phases[phase], timeout: 800;
     $(".phase[data-phase!=#{phase}]").removeClass 'active'
     $(".phase[data-phase=#{phase}]").addClass 'active'
@@ -51,8 +53,11 @@ class Replay
   get_action_inteval: ->
     Math.pow(10, 4 - $('#setting_action_inteval').val() * 0.2)
 
-@duel = new Duel()
+@duel = new Duel(el: $('.stage'))
 @replay = new Replay()
+@Card = Card
+
+$('.side_tabs').tabs()
 
 $('#setting_action_inteval_slider').slider
   min: 1,
@@ -61,6 +66,16 @@ $('#setting_action_inteval_slider').slider
   slide: (event, ui )->
     $( "#setting_action_inteval" ).val ui.value
 
+$('#setting_enable_3d').change ->
+  if @checked
+    $('.field').transition scale: 2, translate: [116, 40], rotateX: 45
+  else
+    $('.field').transition scale: 2, translate: [116, 40], rotateX: 0
+
+$.i18n.properties
+  name:'card'
+  path:'locales/'
+  mode: 'both'
 
 $(document).ready ->
   $('#setting_enable_3d').change()

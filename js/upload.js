@@ -141,7 +141,7 @@ function readMessage(){
 	//try
 	//{
 	switch(parseInt(list_array[1])){
-		case 0: //deck
+        case 0: //deck
 			palyer_name_0 = getName(list_array[2]);
             duel.set_player_name(palyer_name_0);
 			//$('#Player'+getPlayer(list_array[2])+'name').html(getName(list_array[2]));
@@ -196,8 +196,7 @@ function readMessage(){
 					addNewCard(id, 1, "location_extra", 0);
 				}
 			}
-
-			loadCards(cards_id);
+			Card.fetch(cards_id);
 			break;
         case 40:
             duel.set_turn(list_array[3])
