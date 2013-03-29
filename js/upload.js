@@ -204,8 +204,8 @@ function readMessage(){
 		case 41:
 			//MSG|41|新阶段|抽卡阶段
 			//$('#pdiv').html(list_array[3]);
-            var phases = {"抽卡阶段\r":'DP', "STANDBY\r":'SP',"主要阶段1\r":'M1', "战斗阶段\r":'BP',"主要阶段2\r":'M1', "结束阶段\r":'EP'}
-            duel.set_phase(phases[list_array[3]])
+            var phases = {"抽卡阶段":'DP', "STANDBY":'SP',"主要阶段1":'M1', "战斗阶段":'BP',"主要阶段2":'M1', "结束阶段":'EP'}
+            duel.set_phase(phases[list_array[3].split("\r")[0]])
 			break;
 		case 50://move
 			for (var i=0;i<list_array.length;i++){
