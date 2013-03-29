@@ -76,6 +76,8 @@
     background-image: -webkit-linear-gradient(bottom, transparent, white, transparent);
     color:skyblue;
 }
+
+
 .playerinfo.player{
     float:left;
 }
@@ -114,15 +116,14 @@
     left: 210px;
     top: 310px;
 }
+.phase {
+    -webkit-transition: background-color 0.5s ease;
+}
 .stage {
     /*background-color: pink;*/
     -webkit-perspective-origin: center center;
     transform-origin: 256px 256px;
     position: relative;
-}
-
-.game_card {
-    top: 0px;
 }
 
 .field {
@@ -132,93 +133,161 @@
     background: url(../img/textures/field.png) no-repeat;
     -webkit-transform: scale(2,2) translate(116px,40px);
 }
-/*.field.enable_3d {
-    -webkit-transform: scale3d(2,2,2) translate3d(116px,68px,0) rotateX(55deg);
-}*/
+
+.opponent.hand {
+    -webkit-transform: scale(2,2) translate3d(150px,0px, 0px);
+}
+.player.hand {
+    -webkit-transform: scale(2,2) translate3d(150px,140px, 500px);
+}
+
+.game_card {
+    width: 23px;
+    height: 33px;
+}
 .field .game_card {
-    -webkit-transform-style: preserve-3d; /* antialias: http://stackoverflow.com/questions/6492027/css-transform-jagged-edges-in-chrome */
-}
-.opponent_hand {
     position: absolute;
-    white-space:nowrap;
-    -webkit-transform: translate3d(0,-340px,-3000px);
-
-    /*margin: 0 auto;
-    text-align:center;*/
 }
-.player_hand {
-    position: absolute;
-    white-space:nowrap;
-    -webkit-transform: translate3d(0,830px,-1600px);
+.hand .game_card {
+    float: left;
+}
+.game_card_img {
+    -webkit-transform-origin: left top;
+    -webkit-transform: scale3d(0.125, 0.125, 0.125);
+    max-width: none;
 }
 
-/*.opponent_graveyard {
+.zone {
     position: absolute;
-    -webkit-transform: translate3d(-69px,-54px,0) scale3d(0.14,0.14,0.14);
 }
-.opponent_deck {
-    position: absolute;
-    -webkit-transform: translate3d(-69px,-96px,0) scale3d(0.14,0.14,0.14);
+.opponent .zone {
+    -webkit-transform: rotate(180deg);
 }
-*/
+.opponent .zone.deck{
+    left: 30px;
+    top: 48px;
+}
+
+.opponent .zone.extra{
+    left: 244px;
+    top: 48px;
+}
+
+.opponent .zone.fieldspell{
+    left: 244px;
+    top: 89px;
+}
+
+.opponent .zone.graveyard{
+    left: 30px;
+    top: 89px;
+}
+
+.opponent .zone.removed{
+    left: 30px;
+    top: 130px;
+}
+
+
+.opponent .spelltraps.zone0 {
+    left: 67px;
+    top: 70px;
+}
+.opponent .spelltraps.zone1 {
+    left: 102px;
+    top: 70px;
+}
+.opponent .spelltraps.zone2 {
+    left: 137px;
+    top: 70px;
+}
+.opponent .spelltraps.zone3 {
+    left: 172px;
+    top: 70px;
+}
+.opponent .spelltraps.zone4 {
+    left: 207px;
+    top: 70px;
+}
+.opponent .monsters.zone0 {
+    left: 67px;
+    top: 110px;
+}
+.opponent .monsters.zone1 {
+    left: 102px;
+    top: 110px;
+}
+.opponent .monsters.zone2 {
+    left: 137px;
+    top: 110px;
+}
+.opponent .monsters.zone3 {
+    left: 172px;
+    top: 110px;
+}
+.opponent .monsters.zone4 {
+    left: 207px;
+    top: 110px;
+}
+
 
 .player .extra {
-    position: absolute;
-    -webkit-transform: translate3d(-69px,97px,0) scale3d(0.125,0.125,0.125);
+    left: 8px;
+    top: 208px;
 }
 .player .deck {
-    position: absolute;
-    -webkit-transform: translate3d(145px,97px,0) scale3d(0.125,0.125,0.125);
+    left: 222px;
+    top: 208px;
 }
 .player .fieldspell {
-    position: absolute;
-    -webkit-transform: translate3d(-69px,55px,0) scale3d(0.125, 0.125, 0.125);
+    left: 8px;
+    top: 166px;
 }
 .player .graveyard {
-    position: absolute;
-    -webkit-transform: translate3d(145px,55px,0) scale3d(0.125, 0.125, 0.125);
+    left: 222px;
+    top: 166px;
 }
 .player .removed {
-    position: absolute;
-    -webkit-transform: translate3d(145px,13px,0) scale3d(0.125, 0.125, 0.125);
+    left: 222px;
+    top: 110px;
 }
-.spelltraps.zone0 {
-    position: absolute;
-    -webkit-transform: translate3d(-33px,74px,0) scale3d(0.125, 0.125, 0.125);
+.player .spelltraps.zone0 {
+    left: 45px;
+    top: 186px;
 }
-.spelltraps.zone1 {
-    position: absolute;
-    -webkit-transform: translate3d(2px,74px,0) scale3d(0.125, 0.125, 0.125);
+.player .spelltraps.zone1 {
+    left: 80px;
+    top: 186px;
 }
-.spelltraps.zone2 {
-    position: absolute;
-    -webkit-transform: translate3d(37px,74px,0) scale3d(0.125, 0.125, 0.125);
+.player .spelltraps.zone2 {
+    left: 115px;
+    top: 186px;
 }
-.spelltraps.zone3 {
-    position: absolute;
-    -webkit-transform: translate3d(73px,74px,0) scale3d(0.125, 0.125, 0.125);
+.player .spelltraps.zone3 {
+    left: 150px;
+    top: 186px;
 }
-.spelltraps.zone4 {
-    position: absolute;
-    -webkit-transform: translate3d(108px,74px,0) scale3d(0.125, 0.125, 0.125);
+.player .spelltraps.zone4 {
+    left: 185px;
+    top: 186px;
 }
-.monsters.zone0 {
-    position: absolute;
-    -webkit-transform: translate3d(-33px,36px,0) scale3d(0.125, 0.125, 0.125);
+.player .monsters.zone0 {
+    left: 45px;
+    top: 147px;
 }
-.monsters.zone1 {
-    position: absolute;
-    -webkit-transform: translate3d(2px,36px,0) scale3d(0.125, 0.125, 0.125);
+.player .monsters.zone1 {
+    left: 80px;
+    top: 147px;
 }
-.monsters.zone2 {
-    position: absolute;
-    -webkit-transform: translate3d(37px,36px,0) scale3d(0.125, 0.125, 0.125);
+.player .monsters.zone2 {
+    left: 115px;
+    top: 147px;
 }
-.monsters.zone3 {
-    position: absolute;
-    -webkit-transform: translate3d(73px,36px,0) scale3d(0.125, 0.125, 0.125);
+.player .monsters.zone3 {
+    left: 150px;
+    top: 147px;
 }
-.monsters.zone4 {
-    position: absolute;
-    -webkit-transform: translate3d(108px,36px,0) scale3d(0.125, 0.125, 0.125);
+.player .monsters.zone4 {
+    left: 185px;
+    top: 147px;
 }

@@ -138,8 +138,8 @@ function readMessage(){
 	//输出图形解析
 
 
-	try
-	{
+	//try
+	//{
 	switch(parseInt(list_array[1])){
 		case 0: //deck
 			palyer_name_0 = getName(list_array[2]);
@@ -201,6 +201,7 @@ function readMessage(){
 			break;
         case 40:
             duel.set_turn(list_array[3])
+            break;
 		case 41:
 			//MSG|41|新阶段|抽卡阶段
 			//$('#pdiv').html(list_array[3]);
@@ -324,10 +325,10 @@ function readMessage(){
 			readMessage();
 			return;
 		}
-	}catch(e){
+    /*}catch(e){
 		alert(e);
 		alert(message);
-	}
+	}*/
 	setTimeout("readMessage()",replay.get_action_inteval());
 }
 

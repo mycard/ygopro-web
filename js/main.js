@@ -147,10 +147,10 @@ function updateField(field){
 				left = (width-46)/(length-1)*i + 1;
 			$("#thumb-tmpl").tmpl({
 				card_info: card_info,
-				top: top || 3,
-				left: left || 0,
-				right: right || 0,
-				bottom: bottom || 0,
+				//top: top || 3,
+				//left: left || 0,
+				//right: right || 0,
+				//bottom: bottom || 0,
 				card_img_thumb_url: card_img_thumb_url
 			}).appendTo(field);
 		}
@@ -225,7 +225,7 @@ function updateCards(thumbs){
 			else {
 				thumb.style.left = tmplItem.left + "px";
 			}
-			thumbImg.src = card_img_thumb_url + card_id + ".jpg";
+			thumbImg.src = card_img_thumb + card_id + ".jpg";
 			Img.rotate(thumb, 0, true);
 		}
 		else if(card_info.position == "POS_FACEUP_DEFENCE"){
@@ -236,7 +236,7 @@ function updateCards(thumbs){
 			else {
 				thumb.style.left = 10 + "px";
 			}
-			thumbImg.src = card_img_thumb_url + card_id + ".jpg";
+			thumbImg.src = card_img_thumb + card_id + ".jpg";
 			Img.rotate(thumb, -90, true);
 		}
 		else if(card_info.position == "POS_FACEDOWN_DEFENCE"){

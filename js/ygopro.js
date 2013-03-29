@@ -49,6 +49,19 @@
     };
 
     Duel.prototype.set_phase = function(phase) {
+      var phases;
+
+      phases = {
+        DP: '抽卡阶段',
+        SP: '准备阶段',
+        M1: '主要阶段1',
+        BP: '战斗阶段',
+        M2: '主要阶段2',
+        EP: '结束阶段'
+      };
+      humane.log(phases[phase], {
+        timeout: 800
+      });
       $(".phase[data-phase!=" + phase + "]").removeClass('active');
       return $(".phase[data-phase=" + phase + "]").addClass('active');
     };
@@ -117,6 +130,10 @@
 
   $(document).ready(function() {
     return $('#setting_enable_3d').change();
+  });
+
+  $('.zone').each(function(index, element) {
+    return $(element).data('card_list', []);
   });
 
 }).call(this);

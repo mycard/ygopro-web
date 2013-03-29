@@ -19,6 +19,8 @@ class Duel extends Spine.Controller
   set_opponent_lp: (lp)->
     @set_lp('opponent',lp)
   set_phase: (phase)->
+    phases = {DP: '抽卡阶段', SP: '准备阶段', M1: '主要阶段1', BP: '战斗阶段', M2: '主要阶段2', EP: '结束阶段'}
+    humane.log phases[phase], timeout: 800;
     $(".phase[data-phase!=#{phase}]").removeClass 'active'
     $(".phase[data-phase=#{phase}]").addClass 'active'
   set_turn: (turn)->
@@ -62,3 +64,8 @@ $('#setting_action_inteval_slider').slider
 
 $(document).ready ->
   $('#setting_enable_3d').change()
+
+
+#test
+$('.zone').each (index, element)->
+  $(element).data('card_list', [])
