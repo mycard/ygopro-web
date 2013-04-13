@@ -40,3 +40,11 @@ class @mycard
     atk: card.atk if card.attribute
     def: card.def if card.attribute
     description: lang.desc
+
+  @load_duel_comments = (duel_id, skip=0, limit=0, callback)->
+    $.getJSON "https://my-card.in/duels/#{duel_id}/comments?limit=#{limit}&skip=#{skip}", (comments)->
+      comments = comments.rows if comments.rows
+      callback(comments)
+
+  @new_duel_comment = (comment, callback)->
+    $.post "https://my-card.in/duels/#{comment.duel_id}/comments", comment, callback

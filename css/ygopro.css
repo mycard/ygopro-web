@@ -294,3 +294,12 @@
     left: 185px;
     top: 147px;
 }
+
+.comment {
+    position: absolute;
+    bottom: 0px;
+}
+
+.new_comment,.new_comment input, .new_comment select {
+    margin-bottom: 0px;
+}

@@ -95,6 +95,7 @@ function play(ctl) {
 }
 
 function readMessage() {
+    replay.set_action_id(message_id)
     if (paused)
         return;
 

@@ -50,11 +50,31 @@ class Duel extends Spine.Controller
 
 class Replay
   speed: $('#setting_action_inteval').val()
+  duel_id: null
+  action_id: 0
+  comments: []
+  constructor: (duel_id)->
+    @duel_id = duel_id
+    $('.new_comment')[0].duel_id.value = @duel_id
+    $('.new_comment').ajaxForm
+      url: "https://my-card.in/duels/#{@duel_id}/comments"
+      type: "POST"
+      success: (data)->
+        console.log "commented successful"
+    mycard.load_duel_comments duel_id, 0, 0, (comments)=>
+      @comments = comments
+      @show_comment(comment) for comment in @comments when comment.action_id == @action_id
   get_action_inteval: ->
     Math.pow(10, 4 - $('#setting_action_inteval').val() * 0.2)
+  set_action_id: (action_id)->
+    @action_id = action_id
+    $('.new_comment')[0].action_id.value = @action_id
+    @show_comment(comment) for comment in @comments when comment.action_id == action_id
+  show_comment: (comment)->
+    console.log comment
 
 @duel = new Duel(el: $('.stage'))
-@replay = new Replay()
+@replay = new Replay(parseInt($.url().param('rname')))  #临时用着现有url，以后会改成 http://my-card.in/duels/id 这样的
 @Card = Card
 
 $('.side_tabs').tabs()

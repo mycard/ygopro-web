@@ -33,13 +33,17 @@
     <script type="text/x-jquery-tmpl" id="card_template">
         <div class="card name">${name}</div>
         <div class="card_attributes">
-            [<span class="card category">${$.i18n.prop('category.'+category)}</span>{{if card_type && card_type != 'normal'}}|<span class="card card_type">${$.i18n.prop('card_type.'+card_type)}</span>{{/if}}]
-            {{if category == 'monster'}}<span class="card type">${$.i18n.prop('type.'+type)}</span>/<span class="card attribute">${$.i18n.prop('attribute.'+attribute)}</span>{{/if}}
+            [<span class="card category">${$.i18n.prop('category.'+category)}</span>{{if card_type && card_type !=
+            'normal'}}|<span class="card card_type">${$.i18n.prop('card_type.'+card_type)}</span>{{/if}}]
+            {{if category == 'monster'}}<span class="card type">${$.i18n.prop('type.'+type)}</span>/<span
+                class="card attribute">${$.i18n.prop('attribute.'+attribute)}</span>{{/if}}
         </div>
-        {{if category == 'monster'}}<div class="card_attributes">
+        {{if category == 'monster'}}
+        <div class="card_attributes">
             [<span class="card level">{{each Array(level)}}★{{/each}}</span>]
             <span class="card atk">${atk}</span>/<span class="card def">${def}</span>
-        {{/if}}</div>
+            {{/if}}
+        </div>
         <div class="card description">
             ${description}
         </div>
@@ -72,7 +76,7 @@
     <div class="side">
         <div class="top">
             <!--<div id="image_wrapper" class="image_wrapper">-->
-                <img class="card_image" src="img/textures/cover.jpg" alt="card"/>
+            <img class="card_image" src="img/textures/cover.jpg" alt="card"/>
             <!--</div>-->
             <!--<img class="image" src="http://images.my-card.in/29088922.jpg"/>-->
             <div class="replay_control">
@@ -185,6 +189,20 @@
             </div>
             <div id="0_location_hand_0" class="player hand zone"></div>
         </div>
+        <div class="comment">
+            <form class="new_comment">
+                <input type="hidden" name="duel_id"/>
+                <input type="hidden" name="action_id"/>
+                <input type="text" name="body"/>
+                <select name="class"> <!-- 这里class值是用一个词的好还是两个词的好? -->
+                    <option value="top fade">顶端渐隐</option>
+                    <option value="middle scroll">滚动字幕</option>
+                    <option value="bottom fade">底端渐隐</option>
+                </select>
+                <input type="hidden" name="style"/> <!-- 暂不支持 -->
+                <input type="submit"/>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -208,6 +226,8 @@
 <script src="js/vendor/jquery.tmpl.min.js" type="text/javascript"></script>
 <script src="js/vendor/jquery.i18n.properties-min-1.0.9.js" type="text/javascript"></script>
 <script src="js/vendor/jquery.transit.min.js" type="text/javascript"></script>
+<script src="js/vendor/jquery.form.js" type="text/javascript"></script>
+<script src="js/vendor/purl.js" type="text/javascript"></script>
 <script src="js/vendor/spine/spine.js" type="text/javascript"></script>
 <script src="js/vendor/humane.min.js" type="text/javascript"></script>
 

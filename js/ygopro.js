@@ -118,12 +118,64 @@
   })(Spine.Controller);
 
   Replay = (function() {
-    function Replay() {}
-
     Replay.prototype.speed = $('#setting_action_inteval').val();
+
+    Replay.prototype.duel_id = null;
+
+    Replay.prototype.action_id = 0;
+
+    Replay.prototype.comments = [];
+
+    function Replay(duel_id) {
+      var _this = this;
+
+      this.duel_id = duel_id;
+      $('.new_comment')[0].duel_id.value = this.duel_id;
+      $('.new_comment').ajaxForm({
+        url: "https://my-card.in/duels/" + this.duel_id + "/comments",
+        type: "POST",
+        success: function(data) {
+          return console.log("commented successful");
+        }
+      });
+      mycard.load_duel_comments(duel_id, 0, 0, function(comments) {
+        var comment, _i, _len, _ref2, _results;
+
+        _this.comments = comments;
+        _ref2 = _this.comments;
+        _results = [];
+        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+          comment = _ref2[_i];
+          if (comment.action_id === _this.action_id) {
+            _results.push(_this.show_comment(comment));
+          }
+        }
+        return _results;
+      });
+    }
 
     Replay.prototype.get_action_inteval = function() {
       return Math.pow(10, 4 - $('#setting_action_inteval').val() * 0.2);
+    };
+
+    Replay.prototype.set_action_id = function(action_id) {
+      var comment, _i, _len, _ref2, _results;
+
+      this.action_id = action_id;
+      $('.new_comment')[0].action_id.value = this.action_id;
+      _ref2 = this.comments;
+      _results = [];
+      for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+        comment = _ref2[_i];
+        if (comment.action_id === action_id) {
+          _results.push(this.show_comment(comment));
+        }
+      }
+      return _results;
+    };
+
+    Replay.prototype.show_comment = function(comment) {
+      return console.log(comment);
     };
 
     return Replay;
@@ -134,7 +186,7 @@
     el: $('.stage')
   });
 
-  this.replay = new Replay();
+  this.replay = new Replay(parseInt($.url().param('rname')));
 
   this.Card = Card;
 
