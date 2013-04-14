@@ -134,8 +134,23 @@
       $('.new_comment').ajaxForm({
         url: "https://my-card.in/duels/" + this.duel_id + "/comments",
         type: "POST",
+        beforeSubmit: function(data, form, options) {
+          form = form[0];
+          form.body.disabled = true;
+          return form.submit.disabled = true;
+        },
         success: function(data) {
-          return console.log("commented successful");
+          var form;
+
+          form = $('.new_comment')[0];
+          _this.show_comment({
+            body: form.body.value,
+            "class": form["class"].value + ' comment_new',
+            style: form.style.value
+          });
+          form.body.value = '';
+          form.body.disabled = false;
+          return form.submit.disabled = false;
         }
       });
       mycard.load_duel_comments(duel_id, 0, 0, function(comments) {
@@ -175,6 +190,41 @@
     };
 
     Replay.prototype.show_comment = function(comment) {
+      var el, line, lines_waiting_count, min_line, min_waiting_count, waiting_count, _i, _ref2;
+
+      el = $('#comment_template').tmpl(comment);
+      lines_waiting_count = {};
+      $('.comment').each(function(index, e) {
+        var position;
+
+        position = $(e).position();
+        if (position.left + $(e).width() > $('#comments').width()) {
+          if (lines_waiting_count[position.top]) {
+            return lines_waiting_count[position.top]++;
+          } else {
+            return lines_waiting_count[position.top] = 1;
+          }
+        }
+      });
+      min_line = 0;
+      min_waiting_count = Number.MAX_VALUE;
+      for (line = _i = 0, _ref2 = $('#comments').height(); _i < _ref2; line = _i += 24) {
+        waiting_count = lines_waiting_count[line] || 0;
+        if (waiting_count < min_waiting_count) {
+          min_line = line;
+          min_waiting_count = waiting_count;
+        }
+        if (min_waiting_count === 0) {
+          break;
+        }
+      }
+      el.css('top', min_line);
+      el.appendTo('#comments');
+      el.transition({
+        x: -$('#comments').width() - el.width()
+      }, 8000, 'linear', function() {
+        return el.remove();
+      });
       return console.log(comment);
     };
 

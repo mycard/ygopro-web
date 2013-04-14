@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="css/humane.original.css">
     <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.1.custom.min.css">
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-
+    <script type="text/x-jquery-tmpl" id="comment_template">
+        <div class="comment ${this.data.class}" style="${style}">${body}</div>
+    </script>
     <script type="text/x-jquery-tmpl" id="field-tmpl">
         <div class="${location}" id="${player}_${location}_${place}" style="top:${top}px; left:${left}px;"></div>
     </script>
@@ -189,15 +191,16 @@
             </div>
             <div id="0_location_hand_0" class="player hand zone"></div>
         </div>
-        <div class="comment">
+        <div id="comments" class="comments"></div>
+        <div class="new_comment_wrapper">
             <form class="new_comment">
                 <input type="hidden" name="duel_id"/>
                 <input type="hidden" name="action_id"/>
                 <input type="text" name="body"/>
-                <select name="class"> <!-- 这里class值是用一个词的好还是两个词的好? -->
-                    <option value="top fade">顶端渐隐</option>
-                    <option value="middle scroll">滚动字幕</option>
-                    <option value="bottom fade">底端渐隐</option>
+                <select name="class">
+                    <option value="comment_top comment_fade">顶端渐隐</option> <!-- WTF class name -->
+                    <option value="comment_scroll" selected>滚动字幕</option>
+                    <option value="comment_bottom comment_fade">底端渐隐</option>
                 </select>
                 <input type="hidden" name="style"/> <!-- 暂不支持 -->
                 <input type="submit"/>

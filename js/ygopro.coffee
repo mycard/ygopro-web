@@ -59,8 +59,17 @@ class Replay
     $('.new_comment').ajaxForm
       url: "https://my-card.in/duels/#{@duel_id}/comments"
       type: "POST"
-      success: (data)->
-        console.log "commented successful"
+      beforeSubmit: (data, form, options)->
+        form = form[0]
+        form.body.disabled = true
+        form.submit.disabled = true
+      success: (data)=>
+        form = $('.new_comment')[0]
+        @show_comment({body: form.body.value, class: form.class.value+' comment_new', style: form.style.value})
+        form.body.value = ''
+        form.body.disabled = false
+        form.submit.disabled = false
+
     mycard.load_duel_comments duel_id, 0, 0, (comments)=>
       @comments = comments
       @show_comment(comment) for comment in @comments when comment.action_id == @action_id
@@ -71,8 +80,34 @@ class Replay
     $('.new_comment')[0].action_id.value = @action_id
     @show_comment(comment) for comment in @comments when comment.action_id == action_id
   show_comment: (comment)->
-    console.log comment
+    el = $('#comment_template').tmpl(comment)
 
+    #算法: 取尚未从右侧完全滚动出来的评论数量最小的行
+    lines_waiting_count = {}
+    $('.comment').each (index, e)->
+      position = $(e).position()
+      if position.left + $(e).width() > $('#comments').width()
+        if lines_waiting_count[position.top]   # define line number instead of reading css attribute directly?
+          lines_waiting_count[position.top]++
+        else
+          lines_waiting_count[position.top] = 1
+
+    min_line = 0
+    min_waiting_count = Number.MAX_VALUE
+
+    for line in [0...$('#comments').height()] by 24 #line height here
+      waiting_count = lines_waiting_count[line] || 0
+      if waiting_count < min_waiting_count
+        min_line = line
+        min_waiting_count = waiting_count
+      if min_waiting_count == 0
+        break
+
+    el.css('top', min_line)
+    el.appendTo('#comments')
+    el.transition {x: -$('#comments').width()-el.width()}, 8000, 'linear', ->  #comments scrolling speed here
+      el.remove()
+    console.log comment
 @duel = new Duel(el: $('.stage'))
 @replay = new Replay(parseInt($.url().param('rname')))  #临时用着现有url，以后会改成 http://my-card.in/duels/id 这样的
 @Card = Card
