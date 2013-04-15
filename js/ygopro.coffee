@@ -50,14 +50,14 @@ class Duel extends Spine.Controller
 
 class Replay
   speed: $('#setting_action_inteval').val()
-  duel_id: null
+  id: null
   action_id: 0
   comments: []
-  constructor: (duel_id)->
-    @duel_id = duel_id
-    $('.new_comment')[0].duel_id.value = @duel_id
+  constructor: (id)->
+    @id = id
+    $('.new_comment')[0].replay_id.value = @id
     $('.new_comment').ajaxForm
-      url: "https://my-card.in/duels/#{@duel_id}/comments"
+      url: "https://my-card.in/replays/#{@id}/comments"
       type: "POST"
       beforeSubmit: (data, form, options)->
         form = form[0]
@@ -69,8 +69,9 @@ class Replay
         form.body.value = ''
         form.body.disabled = false
         form.submit.disabled = false
-
-    mycard.load_duel_comments duel_id, 0, 0, (comments)=>
+    mycard.load_replay id, (replay)->
+      readReplay(replay.yuyu)
+    mycard.load_replay_comments id, 0, 0, (comments)=>
       @comments = comments
       @show_comment(comment) for comment in @comments when comment.action_id == @action_id
   get_action_inteval: ->
@@ -109,7 +110,7 @@ class Replay
       el.remove()
     console.log comment
 @duel = new Duel(el: $('.stage'))
-@replay = new Replay(parseInt($.url().param('rname')))  #临时用着现有url，以后会改成 http://my-card.in/duels/id 这样的
+@replay = new Replay($.url().param('id') || $.url().attr('path').match(/\/replays\/(\w+)/)[1])  #http://mycard.github.io/ygopro-web/show.html?id=3151456122198，http://my-card.in/replays/id
 @Card = Card
 
 $('.side_tabs').tabs()

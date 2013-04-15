@@ -99,23 +99,26 @@
       };
     };
 
-    mycard.load_duel_comments = function(duel_id, skip, limit, callback) {
+    mycard.load_replay = function(id, callback) {
+      return $.getJSON("https://my-card.in/replays/" + id + ".json", function(replay) {
+        return callback(replay);
+      });
+    };
+
+    mycard.load_replay_comments = function(id, skip, limit, callback) {
       if (skip == null) {
         skip = 0;
       }
       if (limit == null) {
         limit = 0;
       }
-      return $.getJSON("https://my-card.in/duels/" + duel_id + "/comments?limit=" + limit + "&skip=" + skip, function(comments) {
-        if (comments.rows) {
-          comments = comments.rows;
-        }
+      return $.getJSON("https://my-card.in/replays/" + id + "/comments?limit=" + limit + "&skip=" + skip, function(comments) {
         return callback(comments);
       });
     };
 
-    mycard.new_duel_comment = function(comment, callback) {
-      return $.post("https://my-card.in/duels/" + comment.duel_id + "/comments", comment, callback);
+    mycard.new_replay_comment = function(comment, callback) {
+      return $.post("https://my-card.in/replays/" + comment.duel_id + "/comments", comment, callback);
     };
 
     return mycard;

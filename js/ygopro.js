@@ -120,19 +120,19 @@
   Replay = (function() {
     Replay.prototype.speed = $('#setting_action_inteval').val();
 
-    Replay.prototype.duel_id = null;
+    Replay.prototype.id = null;
 
     Replay.prototype.action_id = 0;
 
     Replay.prototype.comments = [];
 
-    function Replay(duel_id) {
+    function Replay(id) {
       var _this = this;
 
-      this.duel_id = duel_id;
-      $('.new_comment')[0].duel_id.value = this.duel_id;
+      this.id = id;
+      $('.new_comment')[0].replay_id.value = this.id;
       $('.new_comment').ajaxForm({
-        url: "https://my-card.in/duels/" + this.duel_id + "/comments",
+        url: "https://my-card.in/replays/" + this.id + "/comments",
         type: "POST",
         beforeSubmit: function(data, form, options) {
           form = form[0];
@@ -153,7 +153,10 @@
           return form.submit.disabled = false;
         }
       });
-      mycard.load_duel_comments(duel_id, 0, 0, function(comments) {
+      mycard.load_replay(id, function(replay) {
+        return readReplay(replay.yuyu);
+      });
+      mycard.load_replay_comments(id, 0, 0, function(comments) {
         var comment, _i, _len, _ref2, _results;
 
         _this.comments = comments;
@@ -236,7 +239,7 @@
     el: $('.stage')
   });
 
-  this.replay = new Replay(parseInt($.url().param('rname')));
+  this.replay = new Replay($.url().param('id') || $.url().attr('path').match(/\/replays\/(\w+)/)[1]);
 
   this.Card = Card;
 

@@ -5,20 +5,21 @@ var seeAllMsg = false;
     $.getUrlParam = function (name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
-        if (r != null) return unescape(r[2]); return null;
+        if (r != null) return unescape(r[2]);
+        return null;
     }
 })(jQuery);
 
 var tmp;
 $(function () {
     /*var dragImage  = document.getElementById('DragImage');
-	dragImage.style.display = "none";*/
+     dragImage.style.display = "none";*/
 
     $(".zone").each(function () {
         $.data(this, "card_list", []);
     });
 
-    //httpget方式
+/*    //httpget方式
     $.get('out/' + $.getUrlParam('rname'), function (result) {
         tmp = result;
         readReplay(result);
@@ -26,7 +27,7 @@ $(function () {
 
     $("#source").attr("href", "replay/" + $.getUrlParam('rname'));
     $("#parserfile").attr("href", "out/" + $.getUrlParam('rname'));
-
+*/
     //本地测试
     /*
 	$.get('yunmowu.yrp', function(result){
@@ -173,75 +174,76 @@ function outprint(s) {
             case 0://读取卡组
                 //player1
                 /*    太占地方，所以取消解析
-				appendOutputHtml("=================================卡组信息=================================",true);
-				appendOutputHtml(setName(list_array[2]));
-				for (var i=3;i<list_array.length;i++)
-				{
-					if (list_array[i]=="ALLDECK")
-					{
-						appendOutputHtml("卡组：",true);
-						continue;
-					}
-					if (list_array[i]=="ALLEXTRA")
-					{
-						appendOutputHtml("额外：",true);
-						continue;
-					}
-					if(list_array[i]=="END")
-					{
-						tmppos=i;
-						appendOutputHtml("",true);
-						break;
-					}
-					appendOutputHtml(setCard(list_array[i]));
-				}
-				appendOutputHtml(setName(list_array[i+1]),false);
-				for (var i=i+2;i<list_array.length;i++)
-				{
-					if (list_array[i]=="ALLDECK")
-					{
-						appendOutputHtml("卡组：",true);
-						continue;
-					}
-					if (list_array[i]=="ALLEXTRA")
-					{
-						appendOutputHtml("额外：",true);
-						continue;
-					}
-					if(list_array[i]=="END")
-					{
-						tmppos=i;
-						appendOutputHtml("",true);
-						break;
-					}
-					appendOutputHtml(setCard(list_array[i]));
-				}
-				appendOutputHtml("=================================战斗记录=================================");
+                 appendOutputHtml("=================================卡组信息=================================",true);
+                 appendOutputHtml(setName(list_array[2]));
+                 for (var i=3;i<list_array.length;i++)
+                 {
+                 if (list_array[i]=="ALLDECK")
+                 {
+                 appendOutputHtml("卡组：",true);
+                 continue;
+                 }
+                 if (list_array[i]=="ALLEXTRA")
+                 {
+                 appendOutputHtml("额外：",true);
+                 continue;
+                 }
+                 if(list_array[i]=="END")
+                 {
+                 tmppos=i;
+                 appendOutputHtml("",true);
+                 break;
+                 }
+                 appendOutputHtml(setCard(list_array[i]));
+                 }
+                 appendOutputHtml(setName(list_array[i+1]),false);
+                 for (var i=i+2;i<list_array.length;i++)
+                 {
+                 if (list_array[i]=="ALLDECK")
+                 {
+                 appendOutputHtml("卡组：",true);
+                 continue;
+                 }
+                 if (list_array[i]=="ALLEXTRA")
+                 {
+                 appendOutputHtml("额外：",true);
+                 continue;
+                 }
+                 if(list_array[i]=="END")
+                 {
+                 tmppos=i;
+                 appendOutputHtml("",true);
+                 break;
+                 }
+                 appendOutputHtml(setCard(list_array[i]));
+                 }
+                 appendOutputHtml("=================================战斗记录=================================");
 
-                // Simon: TWO BREAK(s)!
+                 // Simon: TWO BREAK(s)!
 
-				break;*/
+                 break;*/
                 break;
             case 2:
                 if (list_array[5].indexOf("抽卡阶段中") >= 0 ||
                     list_array[5].indexOf("伤害阶段") >= 0 ||
-					list_array[5].indexOf("即将计算战斗伤害") >= 0 ||
-					list_array[5].indexOf("即将产生战斗伤害") >= 0 ||
-					list_array[5].indexOf("准备阶段中") >= 0 ||
-					list_array[5].indexOf("战斗阶段开始") >= 0)
+                    list_array[5].indexOf("即将计算战斗伤害") >= 0 ||
+                    list_array[5].indexOf("即将产生战斗伤害") >= 0 ||
+                    list_array[5].indexOf("准备阶段中") >= 0 ||
+                    list_array[5].indexOf("战斗阶段开始") >= 0)
                     break;
 
                 // Simon: Use RegExp might be better for reading, but poor for profermonce.
                 /*
-                if (list_array[5].match("/抽卡阶段中|伤害阶段|即将计算战斗伤害|准备阶段中|战斗阶段开始/"))
-                    break;
-                */
+                 if (list_array[5].match("/抽卡阶段中|伤害阶段|即将计算战斗伤害|准备阶段中|战斗阶段开始/"))
+                 break;
+                 */
 
                 try {
                     appendOutputHtml("提示", false, "#f60");
                     appendOutputHtml(setName(list_array[3]) + ":\"" + list_array[5] + "\"")
                 }
-                catch (e) { }
+                catch (e) {
+                }
                 break;
             case 5:
                 appendOutputHtml(setName(list_array[3]));
@@ -259,18 +261,19 @@ function outprint(s) {
                 appendOutputHtml(setName(list_array[3]) + "选择效果", true, "#006699");
                 break;
             case 15:
-                /*appendOutputHtml(setName(list_array[2])+"选择卡片",true,"#006699");
-				break;*/
+            /*appendOutputHtml(setName(list_array[2])+"选择卡片",true,"#006699");
+             break;*/
             case 16:
                 //进入连锁
                 break;
             case 18:
                 /*if (!seeAllMsg) break;
-				appendOutputHtml(setName(list_array[2])+"选择放置地点",true,"#cec",12)*/;
+                 appendOutputHtml(setName(list_array[2])+"选择放置地点",true,"#cec",12)*/
+                ;
                 break;
             case 19:
                 /*if (!seeAllMsg) break;
-				appendOutputHtml(setName(list_array[2])+"放置完成",true,"#cec",12);*/
+                 appendOutputHtml(setName(list_array[2])+"放置完成",true,"#cec",12);*/
                 break;
             case 21:
                 if (!seeAllMsg) break;
@@ -296,22 +299,22 @@ function outprint(s) {
                 break;
             case 50:
                 /*for (var i=0;i<list_array.length;i++)
-				{
-					if (list_array[i]=="REMOVECARD"){
-						appendOutputHtml("移除");
-						appendOutputHtml(setName(list_array[i+1]));
-						appendOutputHtml(setpos(list_array[i+2]));
-						appendOutputHtml(setCard(list_array[i+3]));
-					}
-					if (list_array[i]=="ADDCARD"){
-						appendOutputHtml("将");
-						appendOutputHtml(setCard(list_array[i+3]));
-						appendOutputHtml("放入");
-						appendOutputHtml(setName(list_array[i+1]));
-						appendOutputHtml(setpos(list_array[i+2]));
-						
-					}
-				}*/
+                 {
+                 if (list_array[i]=="REMOVECARD"){
+                 appendOutputHtml("移除");
+                 appendOutputHtml(setName(list_array[i+1]));
+                 appendOutputHtml(setpos(list_array[i+2]));
+                 appendOutputHtml(setCard(list_array[i+3]));
+                 }
+                 if (list_array[i]=="ADDCARD"){
+                 appendOutputHtml("将");
+                 appendOutputHtml(setCard(list_array[i+3]));
+                 appendOutputHtml("放入");
+                 appendOutputHtml(setName(list_array[i+1]));
+                 appendOutputHtml(setpos(list_array[i+2]));
+
+                 }
+                 }*/
                 break;
             case 53:
                 break;

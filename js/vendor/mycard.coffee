@@ -41,10 +41,13 @@ class @mycard
     def: card.def if card.attribute
     description: lang.desc
 
-  @load_duel_comments = (duel_id, skip=0, limit=0, callback)->
-    $.getJSON "https://my-card.in/duels/#{duel_id}/comments?limit=#{limit}&skip=#{skip}", (comments)->
-      comments = comments.rows if comments.rows
+  @load_replay = (id, callback)->
+    $.getJSON "https://my-card.in/replays/#{id}.json", (replay)->
+      callback(replay)
+
+  @load_replay_comments = (id, skip=0, limit=0, callback)->
+    $.getJSON "https://my-card.in/replays/#{id}/comments?limit=#{limit}&skip=#{skip}", (comments)->
       callback(comments)
 
-  @new_duel_comment = (comment, callback)->
-    $.post "https://my-card.in/duels/#{comment.duel_id}/comments", comment, callback
+  @new_replay_comment = (comment, callback)->
+    $.post "https://my-card.in/replays/#{comment.duel_id}/comments", comment, callback
