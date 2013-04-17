@@ -124,9 +124,9 @@ $('#setting_action_inteval_slider').slider
 
 $('#setting_enable_3d').change ->
   if @checked
-    $('.field').transition scale: 2, translate: [116, 40], rotateX: 45
+    $(".stage").addClass("three-d")
   else
-    $('.field').transition scale: 2, translate: [116, 40], rotateX: 0
+    $('.stage').removeClass("three-d")
 
 $.i18n.properties
   name:'card'
