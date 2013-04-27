@@ -221,13 +221,13 @@ function readMessage() {
 
             break;
         case 91://伤害
-            duel.set_lp(getPlayer(list_array[5]) ? 'player' : 'opponent', list_array[6])
+            duel.set_lp(getPlayer(list_array[5]) ? 'opponent' : 'player', list_array[6])
             break;
         case 92:
-            duel.set_lp(getPlayer(list_array[2]) ? 'player' : 'opponent', '+=' + list_array[3])
+            duel.set_lp(getPlayer(list_array[2]) ? 'opponent' : 'player', '+=' + list_array[3])
             break;
         case 100://cost
-            duel.set_lp(getPlayer(list_array[3]) ? 'player' : 'opponent', list_array[7])
+            duel.set_lp(getPlayer(list_array[3]) ? 'opponent' : 'player', list_array[7])
             break;
         default:
             readMessage();

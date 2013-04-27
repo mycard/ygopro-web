@@ -39,10 +39,10 @@ footer {
     margin-right: 30px;
 }
 
-    .replay_control button {
-        width: 72px;
-        display: block;
-    }
+.replay_control button {
+    width: 72px;
+    display: block;
+}
 
 .top {
     height: 272px;
@@ -61,6 +61,7 @@ footer {
     border: 0;
     width: 20px;
 }
+
 /*.setting_action_inteval_slider {
     display: inline;
     width: 30px;
@@ -150,10 +151,10 @@ footer {
     transition: perspective .2s, -webkit-perspective .2s;
 }
 
-    .stage.three-d {
-        perspective: 1000px;
-        -webkit-perspective: 1000px;
-    }
+.stage.three-d {
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+}
 
 .phases {
     position: absolute;
@@ -181,36 +182,36 @@ footer {
     transition-duration: .2s;
 }
 
-    .hand[id^="0"] {
-        top: 85%;
-    }
+.hand[id^="0"] {
+    top: 85%;
+}
 
-    .hand .cell {
-        display: table-cell;
-        text-align: center;
-    }
+.hand .cell {
+    display: table-cell;
+    text-align: center;
+}
 
-    .hand .wrap {
-        height: 100%;
-        width: 0;
-        display: inline;
-    }
+.hand .wrap {
+    height: 100%;
+    width: 0;
+    display: inline;
+}
 
-    .hand .card {
-        position: absolute;
-        max-width: none;
-        height: 100%;
-    }
+.hand .card {
+    position: absolute;
+    max-width: none;
+    height: 100%;
+}
 
 .card {
     height: 100%;
     transition: transform 1s, -webkit-transform 1s;
 }
 
-    .card.defense {
-        transform: rotate(-90deg);
-        -webkit-transform: rotate(-90deg);
-    }
+.card.defense {
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+}
 
 .stage.three-d .hand[id^="1"] {
     width: 50%;
@@ -287,10 +288,10 @@ footer {
     text-align: center;
 }
 
-    .zone.opp {
-        transform: rotate(180deg);
-        -webkit-transform: rotate(180deg);
-    }
+.zone.opp {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+}
 
 .side .zone {
     position: absolute;
@@ -316,6 +317,8 @@ footer {
 }
 
 .comments {
+    /*display: inline-block;*/
+    pointer-events: none;
     position: absolute;
     width: 100%;
     height: 490px;
@@ -331,9 +334,9 @@ footer {
     text-shadow: 1px 1px 5px black;
 }
 
-    .comment.comment_new {
-        border: 1px solid white;
-    }
+.comment.comment_new {
+    border: 1px solid white;
+}
 
 .new_comment_wrapper {
     position: absolute;

@@ -5,12 +5,17 @@ class Card extends Spine.Model
 
 class Duel extends Spine.Controller
   events:
-    "mouseover .game_card": "show"
+    "mouseover .zone, img.card": "show"
   @avatar_url: 'http://my-card.in/users/:name.png'
   show: (event)->
-    id = $(event.target).tmplItem().data.card_info.card_id
-    $('.card_image').replaceWith $('#card_image_template').tmpl {id: id}
-    $('#card').html $('#card_template').tmpl Card.find(id)
+    id = $(event.target).data('id') #手卡
+    if !id                          #场区
+      card_list = $(event.target).data('card_list')
+      if card_list && card_list.length
+        id = card_list[card_list.length - 1]
+    if id
+      $('.card_image').replaceWith $('#card_image_template').tmpl {id: id}
+      $('#card').html $('#card_template').tmpl Card.find(id)
   set_player_name: (name)->
     @set_name('player', name)
   set_opponent_name: (name)->
@@ -110,6 +115,9 @@ class Replay
       el.remove()
     console.log comment
 @duel = new Duel(el: $('.stage'))
+$('.zone .card').each ->
+  $(this).data('card_list', [])
+
 @replay = new Replay($.url().param('id') || $.url().attr('path').match(/\/replays\/(\w+)/)[1])  #http://mycard.github.io/ygopro-web/show.html?id=3151456122198，http://my-card.in/replays/id
 @Card = Card
 
@@ -135,8 +143,3 @@ $.i18n.properties
 
 $(document).ready ->
   $('#setting_enable_3d').change()
-
-
-#test
-$('.zone').each (index, element)->
-  $(element).data('card_list', [])
