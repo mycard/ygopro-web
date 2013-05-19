@@ -34,7 +34,8 @@ footer {
 
 .replay_control {
     float: right;
-    margin-right: 30px;
+    margin-top: 3px;
+	margin-right: 35px;
 }
 
 .replay_control button {
@@ -44,6 +45,7 @@ footer {
 
 .top {
     height: 272px;
+    width:100%;
 }
 
 .side_tabs li {
