@@ -27,11 +27,9 @@ footer {
 }
 
 .card_image {
-    padding: 10px 8px 11px 8px;
+    padding: 5px 5px 5px 5px;
     width: 177px;
     height: 254px;
-    border: 1px solid;
-    background: gray;
 }
 
 .replay_control {
