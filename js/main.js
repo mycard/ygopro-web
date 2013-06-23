@@ -1,4 +1,3 @@
-
 var isIE = /*@cc_on!@*/!1;
 // TODO: detect IE version
 var IE10 = true;
@@ -125,7 +124,7 @@ function resizeStage() {
     }
     else {
         var width = $(".container").width();
-        $(".stage").height(width).width(width).css("margin", ($(".container").height() - width) / 2 + "px 0px");
+        $(".stage").height(width).width(width).css("margin", ($(".container").height() - width) / 7 + "px 0px");
     }
 
     $(".hand .card").css("margin-left", function () {
