@@ -1,1 +1,0 @@
-$('.side_tabs').tabs()

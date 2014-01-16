@@ -1,0 +1,233 @@
+.battlefield {
+    position: relative;
+    transition: all ease .2s;
+    margin: auto;
+}
+
+    .battlefield.three-d {
+        perspective: 900px;
+        transform: translateY(-7%);
+    }
+
+.info {
+    position: absolute;
+    width: 25%;
+    margin: 3%;
+    font-size: 0;
+}
+
+    .info:not(.opp) {
+        bottom: 0;
+        right: 0;
+        direction: rtl;
+    }
+
+    .info.three-d.opp {
+        top: 7%;
+        left: 2%;
+    }
+
+    .info.three-d:not(.opp) {
+        bottom: 7%;
+    }
+
+.lp {
+    position: relative;
+    width: 95%;
+    color: yellow;
+    border-image: url('../img/textures/lpf.png');
+}
+
+.bar {
+    position: absolute;
+    height: 100%;
+    background: url('../img/textures/lp.png');
+}
+
+.number {
+    position: relative;
+    font-size: 18px;
+    text-align: center;
+}
+
+.name {
+    display: inline-block;
+    color: white;
+    font-size: 18px;
+    margin-top: 1%;
+    vertical-align: top;
+    direction: ltr;
+    text-shadow: 1px 1px 2px black;
+}
+
+.avatar {
+    display: inline-block;
+    width: 96px;
+    height: 96px;
+    margin-right: 5%;
+}
+
+.background {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    left: 10%;
+    top: 10%;
+    background-size: 100% 100%;
+    transition: transform .2s, -webkit-transform .2s;
+    background-image: url("../img/field.png");
+}
+
+.hand {
+    position: absolute;
+    display: table;
+    width: 55%;
+    height: 15%;
+    left: 22%;
+    top: 82%;
+    transition-property: left, top, width, height;
+    transition-duration: .2s;
+}
+
+    .hand.opp {
+        top: 3%;
+    }
+
+    .hand .cell {
+        display: table-cell;
+        text-align: center;
+    }
+
+    .hand .wrap {
+        height: 100%;
+        width: 0;
+        display: inline;
+    }
+
+    .hand .card {
+        position: absolute;
+        max-width: none;
+    }
+
+
+.battlefield.three-d .hand {
+    width: 75%;
+    height: 20%;
+    left: 11.5%;
+    top: 84%;
+}
+
+    .battlefield.three-d .hand.opp {
+        width: 57%;
+        height: 15%;
+        left: 20.5%;
+        top: 10%;
+    }
+
+.battlefield.three-d .background {
+    transform: rotateX(45deg);
+    -webkit-transform: rotateX(45deg);
+}
+
+.field {
+    position: absolute;
+    height: 92%;
+    width: 94.6%;
+    left: 2%;
+    top: 4%;
+    font-size: 0;
+}
+
+.column {
+    position: relative;
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.side {
+    width: 11.8%;
+}
+
+.center {
+    width: 76.4%;
+}
+
+.column .wrap {
+    position: relative;
+}
+
+.side .wrap {
+    height: 17.9%;
+    width: 96%;
+    left: 2%;
+}
+
+.center .wrap {
+    height: 16.6%;
+    width: 95.6%;
+    left: 2.2%;
+}
+
+.zone {
+    height: 74%;
+    top: 13%;
+    text-align: center;
+}
+
+    .zone.opp {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+    }
+
+.side .zone {
+    position: absolute;
+    width: auto;
+    margin: 0 11%;
+}
+
+.center .zone {
+    position: relative;
+    display: inline-block;
+    width: 20%;
+}
+
+.side .spacer {
+    height: 10.4%;
+}
+
+.center .spacer {
+    height: 12.6%;
+}
+
+    .center .spacer:first-child {
+        height: 10.4%;
+    }
+
+.card {
+    height: 100%;
+    transition: transform 1s, -webkit-transform 1s;
+}
+
+    .card.more {
+        position: absolute;
+    }
+
+    .card.defense {
+        transform: rotate(-90deg);
+    }
+
+.phases {
+    position: absolute;
+    width: 55%;
+    height: 5%;
+    left: 21.7%;
+    top: 47.5%;
+}
+
+.phase {
+    height: 100%;
+    width: 15.5%;
+    margin-left: 1.1%;
+    transition: background-color 0.5s ease;
+}
