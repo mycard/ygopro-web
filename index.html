@@ -12,18 +12,12 @@
     <section id="battlefield"></section>
 
     <script src="js/jquery-2.0.3.min.js"></script>
+    <script src="js/purl.js"></script>
     <script src="js/battlefield.js"></script>
     <script src="js/duel.js"></script>
     <script src="js/lzma.js"></script>
     <script src="js/replay.js"></script>
-    <script>
-        var battleField = new BattleField($("#battlefield"));
-
-        Replay.parse("rep/1.yrp", battleField).then(function (replay) {
-            window.replay = replay;
-        });
-
-        replay.duel.start();
-    </script>
+    <script src="js/watch.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

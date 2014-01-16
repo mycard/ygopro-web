@@ -6,5 +6,10 @@ html, body {
 }
 
 body{
-    background: url(../img/textures/bg.jpg) no-repeat;
+    background: url(../img/textures/bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
 }
