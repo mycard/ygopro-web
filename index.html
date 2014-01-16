@@ -1,11 +1,29 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-    <title>Ygopro Web</title>
+    <title>Ygopro Web Player</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/battlefield.css" />
 </head>
 <body>
+    <section id="battlefield"></section>
+
+    <script src="js/jquery-2.0.3.min.js"></script>
+    <script src="js/battlefield.js"></script>
+    <script src="js/duel.js"></script>
+    <script src="js/lzma.js"></script>
+    <script src="js/replay.js"></script>
     <script>
-        document.location = "show.html?id=516b75c16840e9e608000002";
+        var battleField = new BattleField($("#battlefield"));
+
+        Replay.parse("rep/1.yrp", battleField).then(function (replay) {
+            window.replay = replay;
+        });
+
+        replay.duel.start();
     </script>
 </body>
 </html>
